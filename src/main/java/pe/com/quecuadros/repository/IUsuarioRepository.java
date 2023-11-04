@@ -11,4 +11,6 @@ import pe.com.quecuadros.model.Usuario;
 public interface IUsuarioRepository extends JpaRepository<Usuario, Integer>{
 	
 	List<Usuario> findByUsername(String username);
+	
+	List<Usuario> findByEmail(String email);
 }

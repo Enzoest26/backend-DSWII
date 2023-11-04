@@ -73,4 +73,10 @@ public class UsuarioService implements IUsuarioService
 		}
 	}
 
+	@Override
+	public List<Usuario> buscarPorEmail(String email) {
+		// TODO Auto-generated method stub
+		return this.usuarioRepository.findByEmail(email);
+	}
+
 }

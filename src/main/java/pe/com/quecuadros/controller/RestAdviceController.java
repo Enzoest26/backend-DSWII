@@ -25,7 +25,7 @@ public class RestAdviceController
 	}
 	
 	@ExceptionHandler(ItemNoEncontradoException.class)
-	@ResponseStatus(code = HttpStatus.NOT_FOUND)
+	@ResponseStatus(code = HttpStatus.BAD_REQUEST)
 	public BaseResponse errorItemNoEncontradoException(ItemNoEncontradoException exception)
 	{
 		return BaseResponse.builder()

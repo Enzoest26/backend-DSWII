@@ -13,6 +13,8 @@ public interface IUsuarioService {
 	
 	public List<Usuario> buscarPorUsername(String username);
 	
+	public List<Usuario> buscarPorEmail(String email);
+	
 	public Usuario registrarUsuario(Usuario usuario);
 	
 	public BaseResponse actualizarUsuario(Usuario usuario);
