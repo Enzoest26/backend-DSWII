@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import pe.com.quecuadros.model.BaseResponse;
+import pe.com.quecuadros.model.CuadroRequest;
 import pe.com.quecuadros.model.Producto;
 import pe.com.quecuadros.service.IProductoService;
 
@@ -44,5 +45,11 @@ public class ProductoRestController {
 	public BaseResponse actualizarProducto(@PathVariable Integer id)
 	{
 		return this.productoService.eliminarProducto(id);
+	}
+	
+	@PostMapping("/personalizado")
+	public Producto registrarCuadroPersonalizado(@RequestBody CuadroRequest producto) {
+		return this.productoService.resgistrarCuadroPersonalizado(producto);
+		
 	}
 }

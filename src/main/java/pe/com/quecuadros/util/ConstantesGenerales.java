@@ -10,6 +10,8 @@ public class ConstantesGenerales {
 	public static final String MENSAJE_ELIMINACION_EXITO = "Eliminación Exitosa";
 	public static final String USUARIO_NO_ENCONTRADO = "USUARIO NO ENCONTRADO";
 	public static final String PRODUCTO_NO_ENCONTRADO = "PRODUCTO NO ENCONTRADO";
+	public static final String COLOR_NO_ENCONTRADO = "COLOR NO ENCONTRADO";
+	public static final String MATERIAL_NO_ENCONTRADO = "MATERIAL NO ENCONTRADO";
 	
 	/*
 	 * Mensaje de RestAdvice

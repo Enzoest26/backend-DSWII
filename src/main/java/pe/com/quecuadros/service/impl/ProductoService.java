@@ -9,7 +9,10 @@ import pe.com.quecuadros.exception.ItemNoEncontradoException;
 import pe.com.quecuadros.model.BaseResponse;
 import pe.com.quecuadros.model.Color;
 import pe.com.quecuadros.model.CuadroRequest;
+import pe.com.quecuadros.model.Material;
 import pe.com.quecuadros.model.Producto;
+import pe.com.quecuadros.repository.IColorRepository;
+import pe.com.quecuadros.repository.IMaterialRepository;
 import pe.com.quecuadros.repository.IProductoRepository;
 import pe.com.quecuadros.service.IProductoService;
 import pe.com.quecuadros.util.ConstantesGenerales;
@@ -18,6 +21,8 @@ import pe.com.quecuadros.util.ConstantesGenerales;
 public class ProductoService implements IProductoService{
 
 	private @Autowired IProductoRepository productoRepository;
+	private @Autowired IColorRepository colorRepository;
+	private @Autowired IMaterialRepository materialRepository;
 	
 	@Override
 	public List<Producto> buscarTodos() {
@@ -55,9 +60,26 @@ public class ProductoService implements IProductoService{
 
 	@Override
 	public Producto resgistrarCuadroPersonalizado(CuadroRequest cuadroRequest) {
+		Color color = colorRepository.findById(cuadroRequest.getColorId()).orElse(null);
+		Material material = materialRepository.findById(cuadroRequest.getMaterialId()).orElse(null);
 		
-
-		return null;
+		if(color == null) {
+			throw new ItemNoEncontradoException(ConstantesGenerales.COLOR_NO_ENCONTRADO);
+		}
+		if(material == null) {
+			throw new ItemNoEncontradoException(ConstantesGenerales.MATERIAL_NO_ENCONTRADO);
+		}
+		
+		Producto producto = new Producto();
+		producto.setNombre("Cuadro Personalizado - " + cuadroRequest.getNombre());
+		producto.setColor(color);
+		producto.setMaterial(material);
+		producto.setDescripcion(cuadroRequest.getMedidaHorizontal() + " horizontal x " + cuadroRequest.getMedidaVertical() + " vertical");
+		producto.setImagen(cuadroRequest.getImagen());
+		producto.setPrecio(40.0);
+		producto.setCantidad(1);
+		
+		return productoRepository.save(producto);
 	}
 
 }

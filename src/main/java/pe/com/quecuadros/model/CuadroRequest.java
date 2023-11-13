@@ -7,7 +7,8 @@ public class CuadroRequest {
 	private String nombre;
 	private int materialId;
 	private int colorId;
-	private String descripcion;
+	private String medidaHorizontal;
+	private String medidaVertical;
 	private byte[] imagen;
 	//private Integer usuario;
 }
