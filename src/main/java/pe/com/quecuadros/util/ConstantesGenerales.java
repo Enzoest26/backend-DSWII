@@ -18,4 +18,7 @@ public class ConstantesGenerales {
 	
 	public static final String MENSAJE_NO_EXISTE = "Recurso no encontrado.";
 	public static final String MENSAJE_ERROR_HTTP_NOT_READABLE = "Contenido de su petición inválida.";
+	
+	public static final String MENSAJE_ITEM_CONFLICTO = "No se puede eliminar el recurso.";
+	
 }

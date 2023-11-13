@@ -28,6 +28,12 @@ public class UsuarioRestController {
 		return this.usuarioService.buscarTodos();
 	}
 	
+	@GetMapping("/buscarPorId/{id}")
+	public Usuario buscarPorId(@PathVariable Integer id)
+	{
+		return this.usuarioService.buscarPorId(id);
+	}
+	
 	@PostMapping("/registrar")
 	public Usuario registrarUsuario(@RequestBody Usuario usuario)
 	{

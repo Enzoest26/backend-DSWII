@@ -3,6 +3,7 @@ package pe.com.quecuadros.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -60,17 +61,22 @@ public class UsuarioService implements IUsuarioService
 
 	@Override
 	public BaseResponse eliminarUsuario(Integer id) {
-		if(this.usuarioRepository.existsById(id))
-		{
-			this.usuarioRepository.deleteById(id);
-			return BaseResponse.builder()
-					.codRespuesta(ConstantesGenerales.CODIGO_EXITO)
-					.mensajeRespuesta(ConstantesGenerales.MENSAJE_ELIMINACION_EXITO)
-					.build();
+		try {
+			if(this.usuarioRepository.existsById(id))
+			{
+				this.usuarioRepository.deleteById(id);
+				return BaseResponse.builder()
+						.codRespuesta(ConstantesGenerales.CODIGO_EXITO)
+						.mensajeRespuesta(ConstantesGenerales.MENSAJE_ELIMINACION_EXITO)
+						.build();
+			}
+			else {
+				throw new ItemNoEncontradoException(ConstantesGenerales.USUARIO_NO_ENCONTRADO);
+			}
+		} catch (DataIntegrityViolationException e) {
+			throw new DataIntegrityViolationException("No se puede eliminar el usuario, esta en uso");
 		}
-		else {
-			throw new ItemNoEncontradoException(ConstantesGenerales.USUARIO_NO_ENCONTRADO);
-		}
+		
 	}
 
 	@Override
