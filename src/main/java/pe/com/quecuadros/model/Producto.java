@@ -5,7 +5,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Lob;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
 
@@ -37,4 +39,12 @@ public class Producto {
 	
 	@Column(name = "usuario_id")
 	private Integer usuarioId;
+	
+	@ManyToOne
+	@JoinColumn(name = "color_id")
+	private Color color;
+	
+	@ManyToOne
+	@JoinColumn(name = "material_id")
+	private Material material;
 }

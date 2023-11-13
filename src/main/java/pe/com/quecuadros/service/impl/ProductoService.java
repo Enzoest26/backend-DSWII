@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 import pe.com.quecuadros.exception.ItemNoEncontradoException;
 import pe.com.quecuadros.model.BaseResponse;
+import pe.com.quecuadros.model.Color;
+import pe.com.quecuadros.model.CuadroRequest;
 import pe.com.quecuadros.model.Producto;
 import pe.com.quecuadros.repository.IProductoRepository;
 import pe.com.quecuadros.service.IProductoService;
@@ -49,6 +51,13 @@ public class ProductoService implements IProductoService{
 					.build();
 		}
 		throw new ItemNoEncontradoException(ConstantesGenerales.PRODUCTO_NO_ENCONTRADO);
+	}
+
+	@Override
+	public Producto resgistrarCuadroPersonalizado(CuadroRequest cuadroRequest) {
+		
+
+		return null;
 	}
 
 }
