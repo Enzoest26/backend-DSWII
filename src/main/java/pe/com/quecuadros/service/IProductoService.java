@@ -10,6 +10,8 @@ public interface IProductoService {
 	
 	public List<Producto> buscarTodos();
 	
+	public Producto buscarPorId(Integer id);
+	
 	public Producto registrarProducto(Producto producto);
 	
 	public BaseResponse actualizarProducto(Producto producto);
@@ -17,4 +19,6 @@ public interface IProductoService {
 	public BaseResponse eliminarProducto(Integer id);
 	
 	public Producto resgistrarCuadroPersonalizado(CuadroRequest cuadroRequest);
+	
+	public Producto actualizarCuadroPersonalizado(Integer id, CuadroRequest cuadroRequest);
 }

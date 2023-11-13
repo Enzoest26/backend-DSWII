@@ -82,4 +82,42 @@ public class ProductoService implements IProductoService{
 		return productoRepository.save(producto);
 	}
 
+	@Override
+	public Producto buscarPorId(Integer id) {
+		Producto producto = productoRepository.findById(id).orElse(null);
+		
+		if(producto != null) {
+			return producto;
+		}
+		
+		throw new ItemNoEncontradoException(ConstantesGenerales.PRODUCTO_NO_ENCONTRADO);
+	}
+
+	@Override
+	public Producto actualizarCuadroPersonalizado(Integer id, CuadroRequest cuadroRequest) {
+		Producto producto = productoRepository.findById(id).orElse(null);
+		Color color = colorRepository.findById(cuadroRequest.getColorId()).orElse(null);
+		Material material = materialRepository.findById(cuadroRequest.getMaterialId()).orElse(null);
+		
+		if(color == null) {
+			throw new ItemNoEncontradoException(ConstantesGenerales.COLOR_NO_ENCONTRADO);
+		}
+		if(material == null) {
+			throw new ItemNoEncontradoException(ConstantesGenerales.MATERIAL_NO_ENCONTRADO);
+		}
+		if(producto == null) {
+			throw new ItemNoEncontradoException(ConstantesGenerales.PRODUCTO_NO_ENCONTRADO);
+		}
+		
+		producto.setNombre("Cuadro Personalizado - " + cuadroRequest.getNombre());
+		producto.setColor(color);
+		producto.setMaterial(material);
+		producto.setDescripcion(cuadroRequest.getMedidaHorizontal() + " horizontal x " + cuadroRequest.getMedidaVertical() + " vertical");
+		producto.setImagen(cuadroRequest.getImagen());
+		producto.setPrecio(40.0);
+		producto.setCantidad(1);
+		
+		return productoRepository.save(producto);
+	}
+
 }

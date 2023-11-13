@@ -29,6 +29,11 @@ public class ProductoRestController {
 		return this.productoService.buscarTodos();
 	}
 	
+	@GetMapping("buscarPorId/{id}")
+	public Producto buscarPorId(@PathVariable Integer id) {
+		return this.productoService.buscarPorId(id);
+	}
+	
 	@PostMapping("/registrar")
 	public Producto registrarProducto(@RequestBody Producto usuario)
 	{
@@ -49,7 +54,11 @@ public class ProductoRestController {
 	
 	@PostMapping("/personalizado")
 	public Producto registrarCuadroPersonalizado(@RequestBody CuadroRequest producto) {
-		return this.productoService.resgistrarCuadroPersonalizado(producto);
-		
+		return this.productoService.resgistrarCuadroPersonalizado(producto);		
+	}
+	
+	@PutMapping("/personalizado/{id}")
+	public Producto actualizarCuadroPersonalizado(@PathVariable Integer id, @RequestBody CuadroRequest cuadroRequest) {
+		return this.productoService.actualizarCuadroPersonalizado(id, cuadroRequest);
 	}
 }
