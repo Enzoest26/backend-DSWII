@@ -8,7 +8,7 @@ import pe.com.quecuadros.model.Usuario;
 public interface IUsuarioService {
 	
 	public List<Usuario> buscarTodos();
-	
+		
 	public Usuario buscarPorId(Integer id);
 	
 	public List<Usuario> buscarPorUsername(String username);

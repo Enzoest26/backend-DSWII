@@ -85,4 +85,5 @@ public class UsuarioService implements IUsuarioService
 		return this.usuarioRepository.findByEmail(email);
 	}
 
+
 }

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import pe.com.quecuadros.model.BaseResponse;
@@ -50,5 +51,11 @@ public class UsuarioRestController {
 	public BaseResponse actualizarUsuario(@PathVariable Integer id)
 	{
 		return this.usuarioService.eliminarUsuario(id);
+	}
+	
+	@GetMapping("/buscarPorEmail")
+	public Usuario buscarPorEmail(@RequestParam String email)
+	{
+		return this.usuarioService.buscarPorEmail(email).get(0);
 	}
 }
