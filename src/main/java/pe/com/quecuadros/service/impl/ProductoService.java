@@ -3,6 +3,9 @@ package pe.com.quecuadros.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import pe.com.quecuadros.exception.ItemNoEncontradoException;
@@ -118,6 +121,12 @@ public class ProductoService implements IProductoService{
 		producto.setCantidad(1);
 		
 		return productoRepository.save(producto);
+	}
+
+	@Override
+	public Page<Producto> buscarPorPaginado(Integer pagina) {
+		Pageable paginado = PageRequest.of(pagina - 1, 10);
+		return this.productoRepository.findAll(paginado);
 	}
 
 }

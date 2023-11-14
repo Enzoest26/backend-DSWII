@@ -4,6 +4,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -83,6 +86,13 @@ public class UsuarioService implements IUsuarioService
 	public List<Usuario> buscarPorEmail(String email) {
 		// TODO Auto-generated method stub
 		return this.usuarioRepository.findByEmail(email);
+	}
+
+	@Override
+	public Page<Usuario> buscarPorPaginado(Integer pagina) 
+	{
+		Pageable paginado = PageRequest.of(pagina - 1, 10);
+		return this.usuarioRepository.findAll(paginado);
 	}
 
 
