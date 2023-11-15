@@ -45,7 +45,7 @@ public class CarritoCompraService implements ICarritoCompraService
 			detalleOrden.setTotal(s.getPrecio() * s.getCantidad());
 			detalleOrden.setNombre(producto.getNombre());
 			detalles.add(detalleOrden);
-			total += detalleOrden.getPrecio();
+			total += detalleOrden.getTotal();
 		}
 		List<Orden> obtenerUltimo = this.ordenRepository.findTopByOrderByIdDesc();
 		Orden orden = new Orden();
