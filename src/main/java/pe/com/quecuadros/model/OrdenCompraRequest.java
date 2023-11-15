@@ -7,7 +7,7 @@ import lombok.Data;
 @Data
 public class OrdenCompraRequest {
 	
-	private String idUsuario;
+	private Integer idUsuario;
 	
 	private List<DetalleCompraRequest> detalleCompra;
 }

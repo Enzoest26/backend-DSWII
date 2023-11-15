@@ -12,6 +12,7 @@ public class ConstantesGenerales {
 	public static final String PRODUCTO_NO_ENCONTRADO = "PRODUCTO NO ENCONTRADO";
 	public static final String COLOR_NO_ENCONTRADO = "COLOR NO ENCONTRADO";
 	public static final String MATERIAL_NO_ENCONTRADO = "MATERIAL NO ENCONTRADO";
+	public static final String MENSAJE_VENTA_EXITO = "Venta Exitosa";
 	
 	/*
 	 * Mensaje de RestAdvice
