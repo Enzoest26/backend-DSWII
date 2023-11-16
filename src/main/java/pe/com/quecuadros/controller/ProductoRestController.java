@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import pe.com.quecuadros.model.BaseResponse;
 import pe.com.quecuadros.model.CuadroRequest;
 import pe.com.quecuadros.model.Producto;
+import pe.com.quecuadros.model.ProductoRequest;
 import pe.com.quecuadros.model.Usuario;
 import pe.com.quecuadros.service.IProductoService;
 
@@ -38,13 +39,13 @@ public class ProductoRestController {
 	}
 	
 	@PostMapping("/registrar")
-	public Producto registrarProducto(@RequestBody Producto usuario)
+	public Producto registrarProducto(@RequestBody ProductoRequest usuario)
 	{
 		return this.productoService.registrarProducto(usuario);
 	}
 	
 	@PutMapping("/actualizar")
-	public BaseResponse actualizarProducto(@RequestBody Producto usuario)
+	public BaseResponse actualizarProducto(@RequestBody ProductoRequest usuario)
 	{
 		return this.productoService.actualizarProducto(usuario);
 	}

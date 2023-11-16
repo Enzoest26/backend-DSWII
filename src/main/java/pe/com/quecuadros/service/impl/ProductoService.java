@@ -14,6 +14,7 @@ import pe.com.quecuadros.model.Color;
 import pe.com.quecuadros.model.CuadroRequest;
 import pe.com.quecuadros.model.Material;
 import pe.com.quecuadros.model.Producto;
+import pe.com.quecuadros.model.ProductoRequest;
 import pe.com.quecuadros.repository.IColorRepository;
 import pe.com.quecuadros.repository.IMaterialRepository;
 import pe.com.quecuadros.repository.IProductoRepository;
@@ -33,14 +34,41 @@ public class ProductoService implements IProductoService{
 	}
 
 	@Override
-	public Producto registrarProducto(Producto producto) {
+	public Producto registrarProducto(ProductoRequest productoRequest) {
+		
+		Producto producto = new Producto();
+		producto.setCantidad(productoRequest.getCantidad());
+		producto.setDescripcion(productoRequest.getDescripcion());
+		producto.setImagen(productoRequest.getImagen());
+		producto.setNombre(productoRequest.getNombre());
+		producto.setPrecio(productoRequest.getPrecio());
+		producto.setUsuarioId(productoRequest.getUsuarioId());
+		Color color = this.colorRepository.findById(productoRequest.getColor()).orElseThrow(() -> new ItemNoEncontradoException("Color no encontrado"));
+		Material material = this.materialRepository.findById(productoRequest.getMaterial()).orElseThrow(() -> new ItemNoEncontradoException("Material no encontrado"));
+		producto.setMaterial(material);
+		producto.setColor(color);
 		return this.productoRepository.save(producto);
 	}
 
 	@Override
-	public BaseResponse actualizarProducto(Producto producto) {
-		if(this.productoRepository.existsById(producto.getIdProducto()))
+	public BaseResponse actualizarProducto(ProductoRequest productoRequest) {
+		
+		Producto producto = this.productoRepository.findById(productoRequest.getIdProducto()).orElseThrow(() -> new ItemNoEncontradoException("Producto no encontrado"));
+		
+		if(producto != null)
 		{
+			//producto.setIdProducto(productoRequest.getIdProducto());
+			producto.setCantidad(productoRequest.getCantidad());
+			producto.setDescripcion(productoRequest.getDescripcion());
+			producto.setImagen(productoRequest.getImagen() == null ? producto.getImagen() : productoRequest.getImagen());
+			producto.setNombre(productoRequest.getNombre());
+			producto.setPrecio(productoRequest.getPrecio());
+			producto.setUsuarioId(productoRequest.getUsuarioId());
+			Color color = this.colorRepository.findById(productoRequest.getColor()).orElseThrow(() -> new ItemNoEncontradoException("Color no encontrado"));
+			Material material = this.materialRepository.findById(productoRequest.getMaterial()).orElseThrow(() -> new ItemNoEncontradoException("Material no encontrado"));
+			producto.setMaterial(material);
+			producto.setColor(color);
+			
 			this.productoRepository.save(producto);
 			return BaseResponse.builder().codRespuesta(ConstantesGenerales.CODIGO_EXITO)
 					.mensajeRespuesta(ConstantesGenerales.MENSAJE_ACTUALIZACION_EXITO)
@@ -63,8 +91,8 @@ public class ProductoService implements IProductoService{
 
 	@Override
 	public Producto resgistrarCuadroPersonalizado(CuadroRequest cuadroRequest) {
-		Color color = colorRepository.findById(cuadroRequest.getColorId()).orElse(null);
-		Material material = materialRepository.findById(cuadroRequest.getMaterialId()).orElse(null);
+		Color color = colorRepository.findById(cuadroRequest.getColorId()).orElseThrow(() -> new ItemNoEncontradoException("Color no encontrado"));
+		Material material = materialRepository.findById(cuadroRequest.getMaterialId()).orElseThrow(() -> new ItemNoEncontradoException("Material no encontrado"));
 		
 		if(color == null) {
 			throw new ItemNoEncontradoException(ConstantesGenerales.COLOR_NO_ENCONTRADO);
