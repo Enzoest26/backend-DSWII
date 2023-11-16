@@ -10,5 +10,5 @@ public class CuadroRequest {
 	private String medidaHorizontal;
 	private String medidaVertical;
 	private byte[] imagen;
-	//private Integer usuario;
+	private int usuarioId;
 }

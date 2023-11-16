@@ -105,8 +105,10 @@ public class ProductoService implements IProductoService{
 		producto.setNombre("Cuadro Personalizado - " + cuadroRequest.getNombre());
 		producto.setColor(color);
 		producto.setMaterial(material);
-		producto.setDescripcion(cuadroRequest.getMedidaHorizontal() + " horizontal x " + cuadroRequest.getMedidaVertical() + " vertical");
+		producto.setDescripcion("Marco de " + material.getDescripcion() + ", color " + color.getDescripcion() + ", " + 
+				cuadroRequest.getMedidaHorizontal() + " horizontal x " + cuadroRequest.getMedidaVertical() + " vertical");
 		producto.setImagen(cuadroRequest.getImagen());
+		producto.setUsuarioId(cuadroRequest.getUsuarioId());
 		producto.setPrecio(40.0);
 		producto.setCantidad(1);
 		
@@ -143,8 +145,10 @@ public class ProductoService implements IProductoService{
 		producto.setNombre("Cuadro Personalizado - " + cuadroRequest.getNombre());
 		producto.setColor(color);
 		producto.setMaterial(material);
-		producto.setDescripcion(cuadroRequest.getMedidaHorizontal() + " horizontal x " + cuadroRequest.getMedidaVertical() + " vertical");
+		producto.setDescripcion("Marco de " + material.getDescripcion() + ", color " + color.getDescripcion() + ", " + 
+				cuadroRequest.getMedidaHorizontal() + " horizontal x " + cuadroRequest.getMedidaVertical() + " vertical");
 		producto.setImagen(cuadroRequest.getImagen());
+		producto.setUsuarioId(cuadroRequest.getUsuarioId());
 		producto.setPrecio(40.0);
 		producto.setCantidad(1);
 		
