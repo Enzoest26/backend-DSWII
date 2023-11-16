@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import lombok.Data;
 import pe.com.quecuadros.model.Login;
 import pe.com.quecuadros.model.Usuario;
 import pe.com.quecuadros.service.ILoginService;

@@ -18,7 +18,6 @@ import pe.com.quecuadros.model.BaseResponse;
 import pe.com.quecuadros.model.CuadroRequest;
 import pe.com.quecuadros.model.Producto;
 import pe.com.quecuadros.model.ProductoRequest;
-import pe.com.quecuadros.model.Usuario;
 import pe.com.quecuadros.service.IProductoService;
 
 @RestController
@@ -70,5 +69,11 @@ public class ProductoRestController {
 	public Page<Producto> buscarPorPagina(@RequestParam Integer pagina)
 	{
 		return this.productoService.buscarPorPaginado(pagina);
+	}
+	
+	@GetMapping("/primeros-3")
+	public List<Producto> obtenerPrimeros3()
+	{
+		return this.productoService.obtener3Ultimos();
 	}
 }

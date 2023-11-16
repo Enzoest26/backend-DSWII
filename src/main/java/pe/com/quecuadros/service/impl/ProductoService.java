@@ -161,4 +161,9 @@ public class ProductoService implements IProductoService{
 		return this.productoRepository.findAll(paginado);
 	}
 
+	@Override
+	public List<Producto> obtener3Ultimos() {
+		return this.productoRepository.findFirst3ByOrderByIdProductoDesc();
+	}
+
 }

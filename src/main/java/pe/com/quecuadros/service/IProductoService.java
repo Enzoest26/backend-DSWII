@@ -8,11 +8,12 @@ import pe.com.quecuadros.model.BaseResponse;
 import pe.com.quecuadros.model.CuadroRequest;
 import pe.com.quecuadros.model.Producto;
 import pe.com.quecuadros.model.ProductoRequest;
-import pe.com.quecuadros.model.Usuario;
 
 public interface IProductoService {
 	
 	public List<Producto> buscarTodos();
+	
+	public List<Producto> obtener3Ultimos();
 	
 	public Producto buscarPorId(Integer id);
 	
