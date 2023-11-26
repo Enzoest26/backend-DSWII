@@ -40,7 +40,8 @@ public class CarritoCompraService implements ICarritoCompraService
 			DetalleOrden detalleOrden = new DetalleOrden();
 			detalleOrden.setCantidad(s.getCantidad());
 			detalleOrden.setPrecio(s.getPrecio());
-			Producto producto = this.productoService.buscarPorId(s.getIdProducto());
+			//
+			Producto producto = this.productoService.buscarPorId(s.getIdProducto()).orElse(null);
 			detalleOrden.setProducto(producto);
 			detalleOrden.setTotal(s.getPrecio() * s.getCantidad());
 			detalleOrden.setNombre(producto.getNombre());
