@@ -10,6 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import jakarta.security.auth.message.callback.PrivateKeyCallback.Request;
+import lombok.AllArgsConstructor;
 import pe.com.quecuadros.exception.ItemNoEncontradoException;
 import pe.com.quecuadros.model.BaseResponse;
 import pe.com.quecuadros.model.Color;
@@ -24,6 +25,7 @@ import pe.com.quecuadros.service.IProductoService;
 import pe.com.quecuadros.util.ConstantesGenerales;
 
 @Service
+@AllArgsConstructor
 public class ProductoService implements IProductoService{
 
 	private IProductoRepository productoRepository;
