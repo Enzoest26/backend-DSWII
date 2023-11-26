@@ -6,19 +6,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import pe.com.quecuadros.model.Login;
+import lombok.AllArgsConstructor;
 import pe.com.quecuadros.model.Usuario;
+import pe.com.quecuadros.model.request.LoginRequest;
 import pe.com.quecuadros.service.ILoginService;
 import pe.com.quecuadros.service.IUsuarioService;
 
 @Service
+@AllArgsConstructor
 public class LoginService implements ILoginService{
 	
-	private @Autowired IUsuarioService usuarioService;
-	private @Autowired PasswordEncoder passwordEncoder;
+	private IUsuarioService usuarioService;
+	private PasswordEncoder passwordEncoder;
 	
 	@Override
-	public Usuario validarIngreso(Login login) 
+	public Usuario validarIngreso(LoginRequest login) 
 	{
 		List<Usuario> usuarios = this.usuarioService.buscarPorEmail(login.getUsername());
 		if(!usuarios.isEmpty())

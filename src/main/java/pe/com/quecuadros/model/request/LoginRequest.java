@@ -1,9 +1,9 @@
-package pe.com.quecuadros.model;
+package pe.com.quecuadros.model.request;
 
 import lombok.Data;
 
 @Data
-public class Login {
+public class LoginRequest {
 	
 	private String username;
 	

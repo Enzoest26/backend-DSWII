@@ -13,7 +13,7 @@ import pe.com.quecuadros.util.ConstantesGenerales;
 @RestControllerAdvice
 public class RestAdviceController 
 {
-	
+	/*
 	@ExceptionHandler(Exception.class)
 	@ResponseStatus(code = HttpStatus.INTERNAL_SERVER_ERROR)
 	public BaseResponse errorException(Exception exception)
@@ -56,5 +56,5 @@ public class RestAdviceController
 				.descripcion(exception.getMessage())
 				.build();
 	}
-	
+	*/
 }
