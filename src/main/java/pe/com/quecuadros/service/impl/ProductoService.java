@@ -16,7 +16,7 @@ import pe.com.quecuadros.model.Color;
 import pe.com.quecuadros.model.CuadroRequest;
 import pe.com.quecuadros.model.Material;
 import pe.com.quecuadros.model.Producto;
-import pe.com.quecuadros.model.ProductoRequest;
+import pe.com.quecuadros.model.request.ProductoRequest;
 import pe.com.quecuadros.repository.IColorRepository;
 import pe.com.quecuadros.repository.IMaterialRepository;
 import pe.com.quecuadros.repository.IProductoRepository;

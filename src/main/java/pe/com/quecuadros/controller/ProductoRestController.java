@@ -17,16 +17,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import pe.com.quecuadros.model.BaseResponse;
 import pe.com.quecuadros.model.CuadroRequest;
 import pe.com.quecuadros.model.Producto;
-import pe.com.quecuadros.model.ProductoRequest;
+import pe.com.quecuadros.model.request.ProductoRequest;
 import pe.com.quecuadros.service.IProductoService;
 
 @RestController
 @RequestMapping("/productos")
 @AllArgsConstructor
+@Tag(name= "Productos Controller", description = "Controlador de Productos")
 public class ProductoRestController {
 
 	private IProductoService productoService;
