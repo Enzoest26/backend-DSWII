@@ -2,7 +2,8 @@ package pe.com.quecuadros.controller;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,52 +12,55 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import pe.com.quecuadros.model.BaseResponse;
-import pe.com.quecuadros.model.Usuario;
+import lombok.AllArgsConstructor;
+import pe.com.quecuadros.model.request.UsuarioRequest;
 import pe.com.quecuadros.service.IUsuarioService;
 
-@RequestMapping("/usuario")
+@RequestMapping("/usuarios")
 @RestController
+@AllArgsConstructor
 public class UsuarioRestController {
 	
-	private @Autowired IUsuarioService usuarioService;
+	private IUsuarioService usuarioService;
 	
-	@GetMapping("/listarTodos")
-	public List<Usuario> buscarTodos()
+	@GetMapping
+	public ResponseEntity<?> buscarTodos()
 	{
-		return this.usuarioService.buscarTodos();
+		return new ResponseEntity<>(this.usuarioService.buscarTodos(), HttpStatus.OK);
 	}
 	
-	@GetMapping("/buscarPorId/{id}")
-	public Usuario buscarPorId(@PathVariable Integer id)
+	@GetMapping("/{id}")
+	public ResponseEntity<?> buscarPorId(@PathVariable Integer id)
 	{
-		return this.usuarioService.buscarPorId(id);
+		return ResponseEntity.of(this.usuarioService.buscarPorId(id));
 	}
 	
-	@PostMapping("/registrar")
-	public Usuario registrarUsuario(@RequestBody Usuario usuario)
+	@PostMapping
+	public ResponseEntity<?> registrarUsuario(@RequestBody UsuarioRequest request)
 	{
-		return this.usuarioService.registrarUsuario(usuario);
+		return new ResponseEntity<>(this.usuarioService.registrarUsuario(request), HttpStatus.CREATED);
 	}
 	
-	@PutMapping("/actualizar")
-	public BaseResponse actualizarUsuario(@RequestBody Usuario usuario)
+	@PutMapping
+	public ResponseEntity<?> actualizarUsuario(@RequestBody UsuarioRequest request)
 	{
-		return this.usuarioService.actualizarUsuario(usuario);
+		return ResponseEntity.of(this.usuarioService.actualizarUsuario(request));
 	}
 	
-	@DeleteMapping("/eliminar/{id}")
-	public BaseResponse actualizarUsuario(@PathVariable Integer id)
+	@DeleteMapping("/{id}")
+	@ResponseStatus(code = HttpStatus.OK)
+	public void eliimnarUsuario(@PathVariable Integer id)
 	{
-		return this.usuarioService.eliminarUsuario(id);
+		this.usuarioService.eliminarUsuario(id);
 	}
 	
-	@GetMapping("/buscarPorEmail")
-	public Usuario buscarPorEmail(@RequestParam String email)
+	@GetMapping("/email")
+	public ResponseEntity<?> buscarPorEmail(@RequestParam String email)
 	{
-		return this.usuarioService.buscarPorEmail(email).get(0);
+		return new ResponseEntity<>(this.usuarioService.buscarPorEmail(email).get(0), HttpStatus.OK);
 	}
 	
 	

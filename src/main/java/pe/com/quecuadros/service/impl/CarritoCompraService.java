@@ -54,7 +54,7 @@ public class CarritoCompraService implements ICarritoCompraService
 		orden.setDetalles(detalles);
 		orden.setNumero(numeroConCeros);
 		orden.setTotal(total);
-		orden.setUsuario(this.usuarioService.buscarPorId(ordenCompra.getIdUsuario()));
+		orden.setUsuario(this.usuarioService.buscarPorId(ordenCompra.getIdUsuario()).get());
 		this.ordenRepository.save(orden);
 		detalles.stream().forEach(s ->{ 
 			List<Orden> ultimo = this.ordenRepository.findTopByOrderByIdDesc();
