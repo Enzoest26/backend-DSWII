@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import pe.com.quecuadros.model.request.UsuarioRequest;
 import pe.com.quecuadros.service.IUsuarioService;
@@ -22,6 +23,7 @@ import pe.com.quecuadros.service.IUsuarioService;
 @RequestMapping("/usuarios")
 @RestController
 @AllArgsConstructor
+@Tag(name = "Usuarios Controller", description = "Controlador de Usuarios")
 public class UsuarioRestController {
 	
 	private IUsuarioService usuarioService;

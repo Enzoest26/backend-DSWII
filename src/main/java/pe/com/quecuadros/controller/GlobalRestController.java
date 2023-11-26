@@ -11,7 +11,7 @@ import pe.com.quecuadros.util.ConstantesGenerales;
 
 @RestController
 public class GlobalRestController {
-
+/*
 	@RequestMapping(method = {RequestMethod.GET, RequestMethod.DELETE, RequestMethod.POST, RequestMethod.PUT}, path = "/**")
 	@ResponseStatus(code = HttpStatus.NOT_FOUND)
 	public BaseResponse error404() 
@@ -19,5 +19,5 @@ public class GlobalRestController {
 		return BaseResponse.builder().codRespuesta(ConstantesGenerales.CODIGO_NO_EXISTE)
 				.mensajeRespuesta(ConstantesGenerales.MENSAJE_NO_EXISTE)
 				.build();
-	}
+	}*/
 }

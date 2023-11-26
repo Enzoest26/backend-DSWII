@@ -1,28 +1,33 @@
 package pe.com.quecuadros.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import pe.com.quecuadros.exception.ItemNoEncontradoException;
-import pe.com.quecuadros.model.Login;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.AllArgsConstructor;
 import pe.com.quecuadros.model.Usuario;
+import pe.com.quecuadros.model.request.LoginRequest;
 import pe.com.quecuadros.service.ILoginService;
 
 @RestController
-@RequestMapping("/")
+@RequestMapping("/login")
+@AllArgsConstructor
+@Tag(name = "Login Controller", description = "Controlador de Login")
 public class LoginRestController {
 
-	private @Autowired ILoginService loginService;
+	private ILoginService loginService;
 	
-	@PostMapping("/login")
-	public Usuario login(@RequestBody Login login)
+	@PostMapping
+	public ResponseEntity<?> login(@RequestBody LoginRequest login)
 	{
 		Usuario usuario = this.loginService.validarIngreso(login);
 		if(usuario != null)
-			return usuario;
-		throw new ItemNoEncontradoException("Usuario y/o contraseña incorrectos.");
+			return new ResponseEntity<>(usuario, HttpStatus.UNAUTHORIZED);
+		else
+			return new ResponseEntity<>(HttpStatus.OK);
 	}
 }
