@@ -5,8 +5,8 @@ import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 
-import pe.com.quecuadros.model.CuadroRequest;
 import pe.com.quecuadros.model.Producto;
+import pe.com.quecuadros.model.request.CuadroRequest;
 import pe.com.quecuadros.model.request.ProductoRequest;
 
 public interface IProductoService {
