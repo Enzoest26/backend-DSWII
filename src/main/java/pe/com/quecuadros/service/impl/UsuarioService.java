@@ -44,7 +44,7 @@ public class UsuarioService implements IUsuarioService
 		usuario.setDireccion(request.getDireccion());
 		usuario.setEmail(request.getEmail());
 		usuario.setNombre(request.getNombre());
-		usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
+		usuario.setPassword(passwordEncoder.encode(request.getPassword()));
 		usuario.setTipoUsuario(request.getTipoUsuario());
 		usuario.setUsername(request.getUsername());
 		usuario.setTelefono(request.getTelefono());
@@ -57,7 +57,7 @@ public class UsuarioService implements IUsuarioService
 			usuario.setDireccion(request.getDireccion());
 			usuario.setEmail(request.getEmail());
 			usuario.setNombre(request.getNombre());
-			usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
+			usuario.setPassword(passwordEncoder.encode(request.getPassword()));
 			usuario.setTipoUsuario(request.getTipoUsuario());
 			usuario.setUsername(request.getUsername());
 			usuario.setTelefono(request.getTelefono());

@@ -1,7 +1,5 @@
 package pe.com.quecuadros.controller;
 
-import java.util.List;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -16,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import pe.com.quecuadros.model.request.UsuarioRequest;
 import pe.com.quecuadros.service.IUsuarioService;
@@ -41,13 +40,13 @@ public class UsuarioRestController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<?> registrarUsuario(@RequestBody UsuarioRequest request)
+	public ResponseEntity<?> registrarUsuario(@RequestBody @Valid UsuarioRequest request)
 	{
 		return new ResponseEntity<>(this.usuarioService.registrarUsuario(request), HttpStatus.CREATED);
 	}
 	
 	@PutMapping
-	public ResponseEntity<?> actualizarUsuario(@RequestBody UsuarioRequest request)
+	public ResponseEntity<?> actualizarUsuario(@RequestBody @Valid UsuarioRequest request)
 	{
 		return ResponseEntity.of(this.usuarioService.actualizarUsuario(request));
 	}
