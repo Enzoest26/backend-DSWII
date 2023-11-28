@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import pe.com.quecuadros.model.BaseResponse;
 import pe.com.quecuadros.model.Producto;
@@ -64,12 +65,12 @@ public class ProductoRestController {
 	}
 	
 	@PostMapping("/personalizado")
-	public Producto registrarCuadroPersonalizado(@RequestBody CuadroRequest producto) {
+	public Producto registrarCuadroPersonalizado(@RequestBody @Valid CuadroRequest producto) {
 		return this.productoService.resgistrarCuadroPersonalizado(producto);		
 	}
 
 	@PutMapping("/personalizado/{id}")
-	public Producto actualizarCuadroPersonalizado(@PathVariable Integer id, @RequestBody CuadroRequest cuadroRequest) {
+	public Producto actualizarCuadroPersonalizado(@PathVariable Integer id, @RequestBody @Valid CuadroRequest cuadroRequest) {
 		return this.productoService.actualizarCuadroPersonalizado(id, cuadroRequest);
 	}
 	
