@@ -73,13 +73,13 @@ public class ProductoRestController {
 		return this.productoService.actualizarCuadroPersonalizado(id, cuadroRequest);
 	}
 	
-	@GetMapping("/buscarPorPagina")
+	@GetMapping("/paginas")
 	public Page<Producto> buscarPorPagina(@RequestParam Integer pagina)
 	{
 		return this.productoService.buscarPorPaginado(pagina);
 	}
 	
-	@GetMapping("/primeros-3")
+	@GetMapping("/top-3")
 	public List<Producto> obtenerPrimeros3()
 	{
 		return this.productoService.obtener3Ultimos();
