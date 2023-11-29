@@ -84,35 +84,6 @@ public class ProductoService implements IProductoService{
 	}
 
 	@Override
-	public Producto actualizarCuadroPersonalizado(Integer id, CuadroRequest cuadroRequest) {
-		Producto producto = productoRepository.findById(id).orElse(null);
-		Color color = colorRepository.findById(cuadroRequest.getColorId()).orElse(null);
-		Material material = materialRepository.findById(cuadroRequest.getMaterialId()).orElse(null);
-		
-		if(color == null) {
-			throw new ItemNoEncontradoException(ConstantesGenerales.COLOR_NO_ENCONTRADO);
-		}
-		if(material == null) {
-			throw new ItemNoEncontradoException(ConstantesGenerales.MATERIAL_NO_ENCONTRADO);
-		}
-		if(producto == null) {
-			throw new ItemNoEncontradoException(ConstantesGenerales.PRODUCTO_NO_ENCONTRADO);
-		}
-		
-		producto.setNombre("Cuadro Personalizado - " + cuadroRequest.getNombre());
-		producto.setColor(color);
-		producto.setMaterial(material);
-		producto.setDescripcion("Marco de " + material.getDescripcion() + ", color " + color.getDescripcion() + ", " + 
-				cuadroRequest.getMedidaHorizontal() + " horizontal x " + cuadroRequest.getMedidaVertical() + " vertical");
-		producto.setImagen(cuadroRequest.getImagen());
-		producto.setUsuarioId(cuadroRequest.getUsuarioId());
-		producto.setPrecio(40.0);
-		producto.setCantidad(1);
-		
-		return productoRepository.save(producto);
-	}
-
-	@Override
 	public Page<Producto> buscarPorPaginado(Integer pagina) {
 		Pageable paginado = PageRequest.of(pagina - 1, 10);
 		return this.productoRepository.findAll(paginado);

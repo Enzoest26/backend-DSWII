@@ -27,5 +27,4 @@ public interface IProductoService {
 	
 	public Producto resgistrarCuadroPersonalizado(CuadroRequest cuadroRequest);
 	
-	public Producto actualizarCuadroPersonalizado(Integer id, CuadroRequest cuadroRequest);
 }

@@ -1,9 +1,5 @@
 package pe.com.quecuadros.controller;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -16,11 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
-import pe.com.quecuadros.model.Producto;
 import pe.com.quecuadros.model.request.CuadroRequest;
 import pe.com.quecuadros.model.request.ProductoRequest;
 import pe.com.quecuadros.service.IProductoService;
@@ -58,31 +54,33 @@ public class ProductoRestController {
 	
 	@DeleteMapping("/{id}")
 	@ResponseStatus(code = HttpStatus.OK)
-	public void actualizarProducto(@PathVariable Integer id)
+	public ResponseEntity<?> eliminarProducto(@PathVariable Integer id)
 	{
+		if(buscarPorId(id).getStatusCode() == HttpStatus.NOT_FOUND){
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
 		this.productoService.eliminarProducto(id);
+		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	
 	@PostMapping("/personalizado")
-	public Producto registrarCuadroPersonalizado(@RequestBody @Valid CuadroRequest producto) {
-		return this.productoService.resgistrarCuadroPersonalizado(producto);		
-	}
-
-	@PutMapping("/personalizado/{id}")
-	public Producto actualizarCuadroPersonalizado(@PathVariable Integer id, @RequestBody @Valid CuadroRequest cuadroRequest) {
-		return this.productoService.actualizarCuadroPersonalizado(id, cuadroRequest);
+	public ResponseEntity<?>  registrarCuadroPersonalizado(@RequestBody @Valid CuadroRequest producto) {
+		return new ResponseEntity<>(this.productoService.resgistrarCuadroPersonalizado(producto), HttpStatus.CREATED);		
 	}
 	
 	@GetMapping("/paginas")
-	public Page<Producto> buscarPorPagina(@RequestParam Integer pagina)
+	public ResponseEntity<?> buscarPorPagina(@RequestParam Integer pagina)
 	{
-		return this.productoService.buscarPorPaginado(pagina);
+		if(pagina <= 0) {
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+		}
+		return new ResponseEntity<>(this.productoService.buscarPorPaginado(pagina), HttpStatus.OK);
 	}
 	
 	@GetMapping("/top-3")
-	public List<Producto> obtenerPrimeros3()
+	public ResponseEntity<?> obtenerPrimeros3()
 	{
-		return this.productoService.obtener3Ultimos();
+		return new ResponseEntity<>(this.productoService.obtener3Ultimos(), HttpStatus.OK);
 	}
 	
 }
