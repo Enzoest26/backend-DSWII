@@ -14,7 +14,6 @@ public class ProductoRequest {
 	@Range(min = 0, message = "El id debe ser mayor a {min}")
 	private Integer idProducto;
 	
-	@NotBlank(message = "La cantidad no debe estar en blanco")
 	@NotNull(message = "Ingrese una cantidad")
 	@Min(value = 1, message = "La cantidad debe ser al menos 1")
 	private Integer cantidad;
@@ -31,7 +30,6 @@ public class ProductoRequest {
 	@Length(max = 255, message ="El nombre no debe superar los {max} caracteres")
 	private String nombre;
 	
-	@NotBlank(message = "Ingrese un precio")
 	@NotNull(message = "El precio no puede ser nulo")
     @Min(value = 0, message = "El precio no puede ser negativo")
 	private Double precio;
