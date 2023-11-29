@@ -71,7 +71,7 @@ public class UsuarioService implements IUsuarioService
 	}
 
 	@Override
-	public List<Usuario> buscarPorEmail(String email) {
+	public Optional<Usuario> buscarPorEmail(String email) {
 		return this.usuarioRepository.findByEmail(email);
 	}
 

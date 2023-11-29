@@ -1,6 +1,7 @@
 package pe.com.quecuadros.service.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -21,11 +22,11 @@ public class LoginService implements ILoginService{
 	@Override
 	public Usuario validarIngreso(LoginRequest login) 
 	{
-		List<Usuario> usuarios = this.usuarioService.buscarPorEmail(login.getUsername());
+		Optional<Usuario> usuarios = this.usuarioService.buscarPorEmail(login.getUsername());
 		if(!usuarios.isEmpty())
 		{
-			return this.passwordEncoder.matches( login.getContrasenia(),usuarios.get(0).getPassword()) ? 
-					usuarios.get(0) : null;
+			return this.passwordEncoder.matches(login.getContrasenia(),usuarios.get().getPassword()) ? 
+					usuarios.get() : null;
 		}
 		return null;
 	}

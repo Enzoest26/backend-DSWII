@@ -18,7 +18,7 @@ public interface IUsuarioService {
 	
 	public List<Usuario> buscarPorUsername(String username);
 	
-	public List<Usuario> buscarPorEmail(String email);
+	public Optional<Usuario> buscarPorEmail(String email);
 	
 	public Usuario registrarUsuario(UsuarioRequest usuario);
 	

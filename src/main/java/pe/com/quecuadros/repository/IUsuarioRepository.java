@@ -1,6 +1,7 @@
 package pe.com.quecuadros.repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -10,5 +11,5 @@ public interface IUsuarioRepository extends JpaRepository<Usuario, Integer>{
 	
 	List<Usuario> findByUsername(String username);
 	
-	List<Usuario> findByEmail(String email);
+	Optional<Usuario> findByEmail(String email);
 }

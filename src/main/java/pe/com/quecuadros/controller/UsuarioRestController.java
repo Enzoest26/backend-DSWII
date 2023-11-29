@@ -61,7 +61,7 @@ public class UsuarioRestController {
 	@GetMapping("/email")
 	public ResponseEntity<?> buscarPorEmail(@RequestParam String email)
 	{
-		return new ResponseEntity<>(this.usuarioService.buscarPorEmail(email).get(0), HttpStatus.OK);
+		return ResponseEntity.of(this.usuarioService.buscarPorEmail(email));
 	}
 	
 	
