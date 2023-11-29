@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.RestController;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
-import pe.com.quecuadros.model.BaseResponse;
 import pe.com.quecuadros.model.Producto;
 import pe.com.quecuadros.model.request.CuadroRequest;
 import pe.com.quecuadros.model.request.ProductoRequest;

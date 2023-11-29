@@ -3,35 +3,35 @@ package pe.com.quecuadros.service.impl;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import pe.com.quecuadros.model.BaseResponse;
-import pe.com.quecuadros.model.DetalleCompraRequest;
+import lombok.AllArgsConstructor;
 import pe.com.quecuadros.model.DetalleOrden;
 import pe.com.quecuadros.model.Orden;
-import pe.com.quecuadros.model.OrdenCompraRequest;
 import pe.com.quecuadros.model.Producto;
+import pe.com.quecuadros.model.request.DetalleCompraRequest;
+import pe.com.quecuadros.model.request.OrdenCompraRequest;
 import pe.com.quecuadros.repository.IDetalleOrdenRepository;
 import pe.com.quecuadros.repository.IOrdenRepository;
 import pe.com.quecuadros.service.ICarritoCompraService;
 import pe.com.quecuadros.service.IProductoService;
 import pe.com.quecuadros.service.IUsuarioService;
-import pe.com.quecuadros.util.ConstantesGenerales;
 
 @Service
+@AllArgsConstructor
 public class CarritoCompraService implements ICarritoCompraService
 {
-	private @Autowired IOrdenRepository ordenRepository;
-	private @Autowired IDetalleOrdenRepository detalleOrdenRepository;
-	private @Autowired IUsuarioService usuarioService;
-	private @Autowired IProductoService productoService;
+	private IOrdenRepository ordenRepository;
+	private IDetalleOrdenRepository detalleOrdenRepository;
+	private IUsuarioService usuarioService;
+	private IProductoService productoService;
 	
 	@Override
 	@Transactional
-	public BaseResponse realizarVenta(OrdenCompraRequest ordenCompra)
+	public Optional<Orden> realizarVenta(OrdenCompraRequest ordenCompra)
 	{
 		List<DetalleOrden> detalles = new ArrayList<>();
 		double total = 0.0;
@@ -56,16 +56,13 @@ public class CarritoCompraService implements ICarritoCompraService
 		orden.setNumero(numeroConCeros);
 		orden.setTotal(total);
 		orden.setUsuario(this.usuarioService.buscarPorId(ordenCompra.getIdUsuario()).get());
-		this.ordenRepository.save(orden);
+		Orden orden2 = this.ordenRepository.save(orden);
 		detalles.stream().forEach(s ->{ 
 			List<Orden> ultimo = this.ordenRepository.findTopByOrderByIdDesc();
 			s.setIdOrden(ultimo.get(0).getId());
 		});
 		this.detalleOrdenRepository.saveAll(detalles);
-		return BaseResponse.builder()
-				.codRespuesta(ConstantesGenerales.CODIGO_EXITO)
-				.mensajeRespuesta(ConstantesGenerales.MENSAJE_VENTA_EXITO)
-				.build();
+		return this.ordenRepository.findById(orden.getId());
 	}
 
 }

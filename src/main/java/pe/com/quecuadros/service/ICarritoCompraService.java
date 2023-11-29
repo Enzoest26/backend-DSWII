@@ -1,9 +1,11 @@
 package pe.com.quecuadros.service;
 
-import pe.com.quecuadros.model.BaseResponse;
-import pe.com.quecuadros.model.OrdenCompraRequest;
+import java.util.Optional;
+
+import pe.com.quecuadros.model.Orden;
+import pe.com.quecuadros.model.request.OrdenCompraRequest;
 
 public interface ICarritoCompraService {
 	
-	public BaseResponse realizarVenta(OrdenCompraRequest ordenCompra);
+	public Optional<Orden> realizarVenta(OrdenCompraRequest ordenCompra);
 }
