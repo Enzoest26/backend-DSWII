@@ -1,6 +1,7 @@
 package pe.com.quecuadros.service.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -18,6 +19,11 @@ public class MaterialService implements IMaterialService {
 	@Override
 	public List<Material> buscarTodos() {
 		return materialRepository.findAll();
+	}
+
+	@Override
+	public Optional<Material> buscarPorId(Integer id) {
+		return materialRepository.findById(id);
 	}
 
 }

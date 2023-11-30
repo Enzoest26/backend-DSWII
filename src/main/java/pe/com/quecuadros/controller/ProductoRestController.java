@@ -19,7 +19,10 @@ import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import pe.com.quecuadros.model.request.CuadroRequest;
 import pe.com.quecuadros.model.request.ProductoRequest;
+import pe.com.quecuadros.service.IColorService;
+import pe.com.quecuadros.service.IMaterialService;
 import pe.com.quecuadros.service.IProductoService;
+import pe.com.quecuadros.service.IUsuarioService;
 
 @RestController
 @RequestMapping("/productos")
@@ -28,6 +31,9 @@ import pe.com.quecuadros.service.IProductoService;
 public class ProductoRestController {
 
 	private IProductoService productoService;
+	private IColorService colorService;
+	private IMaterialService materialService;
+	private IUsuarioService usuarioService;
 	
 	@GetMapping
 	public ResponseEntity<?> buscarProductos()
@@ -65,6 +71,15 @@ public class ProductoRestController {
 	
 	@PostMapping("/personalizado")
 	public ResponseEntity<?>  registrarCuadroPersonalizado(@RequestBody @Valid CuadroRequest producto) {
+		if(colorService.buscarPorId(producto.getColorId()).isEmpty()) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		if(materialService.buscarPorId(producto.getMaterialId()).isEmpty()) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		if(usuarioService.buscarPorId(producto.getUsuarioId()).isEmpty()) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
 		return new ResponseEntity<>(this.productoService.resgistrarCuadroPersonalizado(producto), HttpStatus.CREATED);		
 	}
 	

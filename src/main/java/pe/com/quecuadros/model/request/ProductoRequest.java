@@ -34,9 +34,12 @@ public class ProductoRequest {
     @Min(value = 0, message = "El precio no puede ser negativo")
 	private Double precio;
 	
+	@NotNull(message = "Ingrese un id de usuario")
 	private Integer usuarioId;
 	
+	@NotNull(message = "Ingrese un color")
 	private Integer color;
 	
+	@NotNull(message = "Ingrese un material")
 	private Integer material;
 }
